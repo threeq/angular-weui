@@ -109,5 +109,15 @@
             });
         };
 
+        this.wuButtonTest = function () {
+            console.log('xxxxxxxxxxxxxxx');
+        };
+
+        this.testVar = 'nihao'
+
+        this.wuButtonTest1 = function (data) {
+            console.log('000000000000000', data);
+        };
+
     }])
 })(angular.module('test',['weui']));
