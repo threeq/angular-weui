@@ -9,7 +9,6 @@
             WuActionSheet.open({
                 btnGroups:[
                     {
-                        class:'weui_actionsheet_menu',
                         action: 'Ok',
                         buttons:[
                             {
@@ -68,7 +67,7 @@
             }).result.then(function () {
                     console.log('ok');
                 }, function () {
-                    console.log('cancel')
+                    console.log('close alert')
                 });
         };
 
@@ -97,7 +96,7 @@
 
         this.toastLoading = function () {
             var loadingObj = WuToast.loading({
-
+                message:'数据加载中'
             });
             setTimeout(function () {
                 loadingObj.close();

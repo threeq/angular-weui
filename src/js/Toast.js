@@ -39,6 +39,11 @@
                             $scope.message = config.message || '数据加载中';
                         }]
                     });
+                    if(config.hasOwnProperty('time')) {
+                        $timeout(function () {
+                            toastInstance.close();
+                        }, parseInt(config.time))
+                    }
                     return {
                         close: function () {
                             toastInstance.close();

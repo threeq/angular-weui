@@ -17,7 +17,14 @@
                         windowTemplateUrl:'weui/template/wu-window.html',
                         template:'<div wu-action-sheet-template></div>',
                         controller:['$scope', function ($scope) {
-                            $scope.btnGroups = config.btnGroups;
+                            $scope.btnGroups = config.btnGroups || [
+                                    {
+                                        action: 'Cancel',
+                                        buttons:[
+                                            { title: '取消', value: 'cancel'}
+                                        ]
+                                    }
+                                ];
 
                             $scope.triggerBtn = function(group, btn) {
                                 var action = group.action.toLowerCase();
@@ -45,7 +52,7 @@
                      * 打开初始化
                      */
                     (function () {
-                        mask.show().addClass('weui_fade_toggle').click(function () {
+                        mask.show().addClass('weui_fade_toggle').on('click',function () {
                             closeActionSheetAnimate(actionSheet, mask).then(function () {
                                 scope.$dismiss('mask:click');
                             })

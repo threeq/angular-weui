@@ -72,7 +72,7 @@
                 templateUrl: 'weui/template/dialog/default.html',
                 link: function (scope, element, attrs) {
                     var mask = element.find('.weui_mask');
-                    mask.click(function () {
+                    mask.on('click', function () {
                         scope.$apply(function () {
                             scope.$dismiss('mask:click');
                         });
