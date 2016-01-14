@@ -3,7 +3,7 @@
  */
 
 (function (app) {
-    app.controller('TestCtrl',['WuActionSheet','WuDialog',function (WuActionSheet,WuDialog) {
+    app.controller('TestCtrl',['WuActionSheet','WuDialog','WuToast', function (WuActionSheet,WuDialog,WuToast) {
 
         this.actionSheet = function () {
             WuActionSheet.open({
@@ -70,6 +70,39 @@
                 }, function () {
                     console.log('cancel')
                 });
-        }
+        };
+
+        this.dialog = function () {
+            WuDialog.open({
+                title:'自定义按钮',
+                content:'自定义按钮测试',
+                buttons:[
+                    { action:'ok', title:'btn1', class: 'default', value:'btn1' },
+                    { action:'ok', title:'btn2', class: 'primary', value:'btn2' },
+                    { action:'cancel', title:'btn3', class: 'default', value:'btn3' },
+                    { action:'cancel', title:'btn4', class: 'primary', value:'btn4' }
+                ]
+            }).result.then(function () {
+                    console.log("OK: ", arguments[0])
+                },function () {
+                    console.log("Cancel: ", arguments[0])
+                })
+        };
+
+        this.toastComplete = function () {
+            WuToast.complete({
+                time:1000
+            });
+        };
+
+        this.toastLoading = function () {
+            var loadingObj = WuToast.loading({
+
+            });
+            setTimeout(function () {
+                loadingObj.close();
+            }, 1000)
+        };
+
     }])
 })(angular.module('test',['weui']));
