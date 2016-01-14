@@ -29,7 +29,31 @@ gulp.task('sass', function() {
         .pipe(gulp.dest(paths.tmp + '/serve/app/'));
 });
 
-gulp.task('styles', ['css'], function () {
+gulp.task('stylus', function() {
+    return gulp.src([
+        paths.src + '/css/**/*.styl'
+    ]).pipe($.plumber({errorHandler: function handleError(err) {
+        console.error(err.toString());
+        //this.emit('end');
+    }}))
+        .pipe($.stylus())
+        //.pipe($.autoprefixer())
+        .pipe(gulp.dest(paths.tmp + '/serve/app/'));
+});
+
+gulp.task('less', function() {
+    return gulp.src([
+        paths.src + '/css/**/*.less'
+    ]).pipe($.plumber({errorHandler: function handleError(err) {
+        console.error(err.toString());
+        //this.emit('end');
+    }}))
+        .pipe($.less())
+        //.pipe($.autoprefixer())
+        .pipe(gulp.dest(paths.tmp + '/serve/app/'));
+});
+
+gulp.task('styles', ['css', 'stylus'], function () {
 
     var lessOptions = {
         paths: [
@@ -40,7 +64,7 @@ gulp.task('styles', ['css'], function () {
     };
 
     var injectFiles = gulp.src([
-        paths.src + '/{app,components}/**/*.less',
+        paths.src + '/{app,components}/**/*.css',
         '!' + paths.src + '/css/index.less',
         '!' + paths.src + '/css/vendor.less'
     ], {read: false});
@@ -59,8 +83,7 @@ gulp.task('styles', ['css'], function () {
     var indexFilter = $.filter('index.less');
 
     return gulp.src([
-        paths.src + '/css/**/*.less'
-
+        //paths.src + '/css/**/*.css'
     ]).pipe($.plumber({errorHandler: function handleError(err) {
         console.error(err.toString());
         //this.emit('end');
@@ -68,8 +91,7 @@ gulp.task('styles', ['css'], function () {
         //.pipe(indexFilter)
         .pipe($.inject(injectFiles, injectOptions))
         //.pipe(indexFilter.restore())
-        .pipe($.less())
-        .pipe($.autoprefixer())
+        //.pipe($.autoprefixer())
         .on('error', function handleError(err) {
             console.error(err.toString());
             //this.emit('end');

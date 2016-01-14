@@ -158,7 +158,7 @@
 
 /**
  * A helper directive for the $modal service. It creates a backdrop element.
- */
+ *//*
     .directive('wuModalBackdrop', ['$animateCss', '$injector', '$wuModalStack',
         function($animateCss, $injector, $modalStack) {
             return {
@@ -257,20 +257,20 @@
 
 
                         $q.when(animationPromise).then(function() {
-                            /**
+                            /!**
                              * If something within the freshly-opened modal already has focus (perhaps via a
                              * directive that causes focus). then no need to try and focus anything.
-                             */
+                             *!/
                             if (!($document[0].activeElement && element[0].contains($document[0].activeElement))) {
                                 var inputWithAutofocus = element[0].querySelector('[autofocus]');
-                                /**
+                                /!**
                                  * Auto-focusing of a freshly-opened modal element causes any child elements
                                  * with the autofocus attribute to lose focus. This is an issue on touch
                                  * based devices which will show and then hide the onscreen keyboard.
                                  * Attempts to refocus the autofocus element via JavaScript will not reopen
                                  * the onscreen keyboard. Fixed by updated the focusing logic to only autofocus
                                  * the modal element if the modal does not contain an autofocus element.
-                                 */
+                                 *!/
                                 if (inputWithAutofocus) {
                                     inputWithAutofocus.focus();
                                 } else {
@@ -298,7 +298,7 @@
             }
         };
     })
-
+*/
     .directive('wuModalTransclude', function() {
         return {
             link: function(scope, element, attrs, controller, transclude) {

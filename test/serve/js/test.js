@@ -103,6 +103,11 @@
                 loadingObj.close();
             }, 1000)
         };
+        this.toastMessage = function () {
+            var loadingObj = WuToast.message({
+                message:'test asdfasdf sdfasdf asdfsadfv sdfsad asfsadf sdfasfda sdfasfasdf message show'
+            });
+        };
 
     }])
 })(angular.module('test',['weui']));
