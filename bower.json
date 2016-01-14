@@ -1,0 +1,38 @@
+{
+  "name": "angular-weui",
+  "version": "0.0.1",
+  "authors": [
+    "three <448987046@qq.com>"
+  ],
+  "description": "angular weui plugins",
+  "main": [
+    "dist/*.min.js",
+    "dist/*.min.css"
+  ],
+  "keywords": [
+    "angular",
+    "weui",
+    "angular-weui"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "angular": "~1.4.5",
+    "underscore": "~1.8.3",
+    "weui": "*"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.4.5"
+  },
+  "resolutions": {
+    "jquery": "~2.1.4",
+    "angular": "~1.4.5"
+  }
+}

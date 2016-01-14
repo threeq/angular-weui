@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-cmn-Hans" data-ng-app="test">
+<head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>angular-WeUI</title>
+    <meta name="description" content="">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <link rel="stylesheet" href="bower_components/weui/dist/style/weui.min.css"/>
+
+    <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- run `gulp wiredep` to automaticaly populate bower styles dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp/serve,src,test/serve}) styles/app.css -->
+    <!-- inject:css -->
+    <!-- css files will be automaticaly insert here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+</head>
+<body data-ng-controller="TestCtrl as testCtrl">
+
+<a href="javascript:;" class="weui_btn weui_btn_primary" data-ng-click="testCtrl.actionSheet()">Action Sheet</a>
+<a href="javascript:;" class="weui_btn weui_btn_disabled weui_btn_primary" data-ng-click="testCtrl.confirm()">confirm</a>
+<a href="javascript:;" class="weui_btn weui_btn_warn" data-ng-click="testCtrl.alert()">alert</a>
+<a href="javascript:;" class="weui_btn weui_btn_disabled weui_btn_warn">确认</a>
+<a href="javascript:;" class="weui_btn weui_btn_default">按钮</a>
+<a href="javascript:;" class="weui_btn weui_btn_disabled weui_btn_default">按钮</a>
+<div class="button_sp_area">
+    <a href="javascript:;" class="weui_btn weui_btn_plain_default">按钮</a>
+    <a href="javascript:;" class="weui_btn weui_btn_plain_primary">按钮</a>
+
+    <a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_primary">按钮</a>
+    <a href="javascript:;" class="weui_btn weui_btn_mini weui_btn_default">按钮</a>
+</div>
+
+<!-- build:js(src) scripts/vendor.js -->
+<!-- bower:js -->
+<!-- run `gulp wiredep` to automaticaly populate bower script dependencies -->
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- build:js({.tmp/serve,.tmp/partials,src,test/serve}) scripts/app.js -->
+<!-- inject:js -->
+<!-- js files will be automaticaly insert here -->
+<!-- endinject -->
+
+<!-- inject:partials -->
+<!-- angular templates will be automatically converted in js and inserted here -->
+<!-- endinject -->
+<!-- endbuild -->
+
+</body>
+</html>

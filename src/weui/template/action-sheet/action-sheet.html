@@ -1,0 +1,8 @@
+<div class="weui_mask_transition"></div>
+<div class="weui_actionsheet">
+    <div data-ng-class="{'weui_actionsheet_menu':$first, 'weui_actionsheet_action':!$first}"
+         data-ng-repeat="group in btnGroups">
+        <div class="weui_actionsheet_cell" data-ng-click="clickBtn(group, btn)"
+             data-ng-repeat="btn in group.buttons">{{btn.title}}</div>
+    </div>
+</div>
