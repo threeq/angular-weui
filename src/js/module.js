@@ -5,6 +5,7 @@
 angular.module('weui.core',[]);
 
 angular.module('weui.button',[]);
+angular.module('weui.progress',[]);
 angular.module('weui.dialog',['weui.core']);
 angular.module('weui.actionsheet',['weui.core']);
 angular.module('weui.toast',['weui.core']);
@@ -13,5 +14,6 @@ angular.module('weui',[
     'weui.button',
     'weui.actionsheet',
     'weui.dialog',
-    'weui.toast'
+    'weui.toast',
+    'weui.progress'
 ]);
