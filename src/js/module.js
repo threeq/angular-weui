@@ -1,8 +1,11 @@
-/**
- * Created by three on 16/1/13.
- */
+
 'use strict';
 angular.module('weui.core',[]);
+
+/**
+ * 企业号/服务号jssdk封装
+ */
+angular.module('weui.jssdk',[]);
 
 angular.module('weui.button',[]);
 angular.module('weui.progress',[]);

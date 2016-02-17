@@ -1,9 +1,10 @@
 # angular-weui
 
-weui的angular组件版本。依赖：
+weui的angular组件版本。同时封装微信jssdk接口为angular服务。依赖：
 > angular 1.x
 > weui
 > jquery
+> 微信jssdk 1.1.0
 
 ### WuActionSheet
 
@@ -161,7 +162,7 @@ wu-progress 是一个angular指令，提供进度条显示。
 
 ### wu-click
 
-wu-progress 是一个angular指令，提供事件点击服务，可以防止用户快速点击按钮。
+wu-click 是一个angular指令，提供事件点击服务，可以防止用户快速点击按钮。
 
 ```html
 <h1>button test</h1>
