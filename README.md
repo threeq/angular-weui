@@ -12,7 +12,9 @@ weui的angular组件版本。同时封装微信jssdk接口为angular服务。依
 同时会在window作用域中创建一个weui_client_browser_checker对象存放客户端信息
 
 WuBrowserChecker.engine   // 呈现引擎信息
+
 WuBrowserChecker.browser  // 浏览器信息
+
 WuBrowserChecker.system   // 系统平台信息
 
 
