@@ -12,11 +12,13 @@ angular.module('weui.progress',[]);
 angular.module('weui.dialog',['weui.core']);
 angular.module('weui.actionsheet',['weui.core']);
 angular.module('weui.toast',['weui.core']);
+angular.module('weui.form',['weui.core']);
 angular.module('weui',[
     'weui.core',
     'weui.button',
     'weui.actionsheet',
     'weui.dialog',
     'weui.toast',
+    'weui.form',
     'weui.progress'
 ]);
