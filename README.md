@@ -6,6 +6,16 @@ weui的angular组件版本。同时封装微信jssdk接口为angular服务。依
 > jquery
 > 微信jssdk 1.1.0
 
+### WuBrowserChecker
+
+客户端检测.支持android/ios/window版本微信客户端,mac/linux/window平台上的各种浏览器检测.
+同时会在window作用域中创建一个weui_client_browser_checker对象存放客户端信息
+
+WuBrowserChecker.engine   // 呈现引擎信息
+WuBrowserChecker.browser  // 浏览器信息
+WuBrowserChecker.system   // 系统平台信息
+
+
 ### WuActionSheet
 
 WuActionSheet是一个angular服务，只提供一个方法：`open(options)`
