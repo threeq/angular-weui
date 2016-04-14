@@ -169,3 +169,5 @@ wu-click 是一个angular指令，提供事件点击服务，可以防止用户�
 <a href="javascript:;" class="weui_btn weui_btn_default" data-wu-click="testCtrl.wuButtonTest()">按钮</a>
 <a href="javascript:;" class="weui_btn weui_btn_default" wu-interval="2000" wu-click="testCtrl.wuButtonTest1(testCtrl.testVar)">按钮</a>
 ```
+
+# angular-weui 开发

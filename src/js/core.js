@@ -962,7 +962,7 @@
             system: system
         }
     })();
-    app.provider('WeuiBrowserChecker', [function () {
+    app.provider('WuBrowserChecker', [function () {
         var self = this;
         self.$get = [function () {
             return window.weui_client_browser_checker;
