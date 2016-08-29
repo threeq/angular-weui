@@ -208,7 +208,7 @@ npm run bower
 3. 启动工程
 
 ```
-npm run dev serve
+npm run dev
 ```
 
 这时会自动启动浏览器打开 demo 界面,如果没有打开可以自己打开浏览器输入地址: http://localhost:3002/test.html
@@ -216,5 +216,5 @@ npm run dev serve
 4. 工程打包
 
 ```
-npm run dev
+npm run dist
 ```

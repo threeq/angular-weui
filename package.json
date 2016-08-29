@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "scripts":{
     "bower": "bower install",
-    "dev" : "gulp"
+    "dev" : "gulp serve",
+    "dist": "gulp"
   },
   "dependencies": {
 
