@@ -30,11 +30,11 @@ function browserSyncInit(baseDir, files, browser) {
       middleware: middleware,
       routes: routes
     },
-    port: 3000,
+    port: 3002,
     open: false,
      browser: browser
   }, function(){
-    var homepage = 'http://localhost:3000/test.html';
+    var homepage = 'http://localhost:3002/test.html';
     if(browser){
       //opn(homepage, {app: browser})
     }else{

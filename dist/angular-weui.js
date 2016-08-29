@@ -1,22 +1,172 @@
-/**
- * Created by three on 16/1/13.
- */
+
 'use strict';
 angular.module('weui.core',[]);
+
+/**
+ * 企业号/服务号jssdk封装
+ */
+angular.module('weui.jssdk',[]);
 
 angular.module('weui.button',[]);
 angular.module('weui.progress',[]);
 angular.module('weui.dialog',['weui.core']);
 angular.module('weui.actionsheet',['weui.core']);
 angular.module('weui.toast',['weui.core']);
+angular.module('weui.form',['weui.core']);
 angular.module('weui',[
     'weui.core',
     'weui.button',
     'weui.actionsheet',
     'weui.dialog',
     'weui.toast',
+    'weui.form',
     'weui.progress'
 ]);
+/**
+ *  微信基本js接口
+ */
+(function (app, window) {
+    app.factory('WuWxJsSdk',['$q', function ($q) {
+        /**
+         * 获取微信js接口对象
+         * @param reject <Function>  如果没有js接口对象，调用通知方法
+         * @returns {*}   false 或 js接口对象
+         */
+        function checkWxObj(reject) {
+            if(!window.wx) {
+                reject({
+                    errMsg: '没有js接口对象，请确认是否引入微信js文件'
+                });
+                return false;
+            }
+            return window.wx;
+        }
+
+        /**
+         * 构建接口参数回调
+         * @param params  <Object>    参数
+         * @param resolve <Function>  成功回调
+         * @param reject  <Function>  失败回调
+         * @param config  <Object>  失败回调
+         * @returns {*}
+         */
+        function builderParamsCb(params, resolve, reject) {
+            params.success = function(res) {
+                resolve(res);
+            };
+            params.fail = function(res) {
+                reject(res)
+            };
+            params.complete = function (res) {
+
+            };
+            params.cancel = function () {
+                reject({
+                    errMsg: '用户取消'
+                })
+            };
+            params.trigger = function () {
+
+            };
+            return params;
+        }
+
+        var __server = {
+            // 权限验证配置
+            config: function () {
+                return $q(function (resolve, reject) {
+                    var wxObj = checkWxObj(reject);
+                    if(wxObj) {
+                        wxObj.config.apply(window, arguments);
+                        wxObj.ready(function(){
+                            // 权限配置成功
+                            resolve({
+                                errMsg: 'config:ok'
+                            })
+                        });
+                        wxObj.error(function(res){
+                            // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+                            reject(res)
+                        });
+                    }
+                });
+            }
+        };
+
+        // 封装原有js接口
+        var jsApiList = [
+            //openEnterpriseContact
+            'checkJsApi',
+
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            'onMenuShareWeibo',
+
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+
+            'startRecord',
+            'stopRecord',
+            'onVoiceRecordEnd',
+            'playVoice',
+            'pauseVoice',
+            'stopVoice',
+            'onVoicePlayEnd',
+            'uploadVoice',
+            'downloadVoice',
+            'translateVoice',
+
+            'getNetworkType',
+
+            'openLocation',
+            'getLocation',
+
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+
+            'scanQRCode',
+
+            'startSearchBeacons', //complete
+            'stopSearchBeacons', //complete
+            'onSearchBeacons',    //complete
+
+            'openProductSpecificView', // 微小店商品页
+
+            'chooseCard',  // 卡券
+            'addCard',
+            'openCard',
+            'consumeAndShareCard',
+
+            'chooseWXPay' // 支付
+
+        ];
+        for(var i=0; i<jsApiList.length; i++) {
+            var apiName = jsApiList[i];
+            __server[apiName] = function (params) {
+                    return $q(function (resolve, reject) {
+                        var wxObj = checkWxObj(reject);
+                        if(wxObj) {
+                            wxObj[apiName](builderParamsCb(params, resolve, reject));
+                        }
+                    });
+                };
+        }
+
+        // TODO 增加自己的业务逻辑接口
+
+        return __server;
+    }]);
+
+})(angular.module('weui.jssdk'), window);
 /**
  * Created by three on 16/1/13.
  */
@@ -135,6 +285,26 @@ angular.module('weui',[
     }]);
 })(angular.module('weui.progress'));
 /**
+ * 常用form组件封装,包含表单验证
+ */
+(function (app) {
+    // input-text
+    // input-textarea
+    // input-file
+    // input-image
+    // input-date
+    // input-map
+    // input-address
+    // input-phone
+    // input-email
+    // input-number
+    // input-search
+    // input-select
+    // input-checkbox
+    // input-radio
+    // input-switch
+})(angular.module('weui.form'));
+/**
  * Created by three on 16/1/13.
  */
 
@@ -227,7 +397,7 @@ angular.module('weui',[
 /**
  * Created by three on 16/1/13.
  */
-(function (app) { app
+(function (app,window) { app
 /**
  * A helper, internal data structure that acts as a map but also allows getting / removing
  * elements in the LIFO order
@@ -1002,7 +1172,200 @@ angular.module('weui',[
 
         return $modalProvider;
     });
-})(angular.module('weui.core'));
+
+    /**
+     * 客户端检测代码
+     */
+    window.weui_client_browser_checker = (function () {
+        // 呈现引擎
+        var engine = {
+            ie: 0,
+            gecko: 0,
+            webkit: 0,
+            khtml: 0,
+            opera: 0,
+            // 完整的版本号
+            ver: null
+        };
+
+        // 浏览器
+        var browser = {
+            // 主要浏览器
+            ie: 0,
+            firefox: 0,
+            safari: 0,
+            konq: 0,
+            opera: 0,
+            chrome: 0,
+            wx: 0,
+            wxpc: 0,
+            // 具体的版本号
+            ver: null
+        };
+
+        // 平台、设备和操作系统
+        var system = {
+            win: false,
+            mac: false,
+            x11: false,
+
+            // 移动设备
+            iphone: false,
+            ipod: false,
+            ipad: false,
+            ios: false,
+            android: false,
+            nokiaN: false,
+            winMobile: false,
+
+            //游戏系统
+            wii: false,
+            ps: false
+        };
+
+        // 检测呈现引擎和浏览器
+        var ua = navigator.userAgent;
+        if (window.opera) {
+            engine.ver = browser.ver = window.opera.version();
+            engine.opera = browser.opera = parseFloat(engine.ver);
+        } else if (/AppleWebKit\/(\S+)/.test(ua)) {
+            engine.ver = RegExp["$1"];
+            engine.webkit = parseFloat(engine.ver);
+
+            // 确定是 chrome 还是 safari
+            if (/Chrome\/(\S+)/.test(ua)) {
+                browser.ver = RegExp["$1"];
+                browser.chrome = parseFloat(browser.ver);
+            } else if (/Version\/(\S+)/.test(ua)) {
+                browser.ver = RegExp["$1"];
+                browser.safari = parseFloat(browser.ver);
+            } else {
+                // 近似地确定版本号
+                var safariVersion = 1;
+                if (engine.webkit < 100) {
+                    safariVersion = 1;
+                } else if (engine.webkit < 312) {
+                    safariVersion = 1.2;
+                } else if (engine.webkit < 412) {
+                    safariVersion = 1.3;
+                } else {
+                    safariVersion = 2;
+                }
+                browser.safari = browser.ver = safariVersion;
+            }
+        } else if (/KHTML\/(\S+)/.test(ua) || /Konqueror\/([^;]+])/.test(ua)) {
+            engine.ver = browser.ver = RegExp["$1"];
+            engine.khtml = browser.konq = parseFloat(engine.ver);
+        } else if (/rv:([^\)]+)\) Gecko\/\d{8}/.test(ua)) {
+            engine.ver = RegExp["$1"];
+            browser.gecko = parseFloat(engine.ver);
+
+            // 确定是否是firefox
+            if (/Firefox\/(\S+)/.test(ua)) {
+                browser.ver = RegExp["$1"];
+                browser.firefox = parseFloat(browser.ver);
+            }
+        } else if (/MSIE ([^;]+)/.test(ua)) {
+            engine.ver = browser.ver = RegExp["$1"];
+            engine.ie = browser.ie = parseFloat(engine.ver);
+        }
+
+        // 微信检查
+        if (/MicroMessenger\/([\d\.]+)/i.test(ua)) {
+            browser.ver = RegExp["$1"];
+            browser.wx = 'micromessenger';
+
+            browser.wxpc = /WindowsWechat/i.test(ua);
+        }
+
+        // 坚持浏览器
+        browser.ie = engine.ie;
+        browser.opera = engine.opera;
+
+        // 检测平台
+        var p = navigator.platform;
+        system.win = p.indexOf("Win") >= 0;
+        system.mac = p.indexOf("Mac") >= 0;
+        system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
+
+        // 检测 windows 操作版本
+        if (system.win) {
+            if (/Win(?:dows )?([^do]{2})\s?(\d+\.\d+)?/.test(ua)) {
+                if (RegExp["$1"] == "NT") {
+                    switch (RegExp["$2"]) {
+                        case "5.0":
+                            system.win = "2000";
+                            break;
+                        case  "5.1":
+                            system.win = "XP";
+                            break;
+                        case "6.0":
+                            system.win = "vista";
+                            break;
+                        case "6.1":
+                            system.win = "7";
+                            break;
+                        default :
+                            system.win = "NT";
+                            break;
+                    }
+                } else if (RegExp["$1"] == "9x") {
+                    system.win = "ME";
+                } else {
+                    system.win = RegExp["$1"];
+                }
+            }
+        }
+
+        // 检测移动设备
+        system.iphone = ua.indexOf("iPhone") > -1;
+        system.ipod = ua.indexOf("iPod") > -1;
+        system.ipad = ua.indexOf("iPad") > -1;
+        system.nokiaN = ua.indexOf("NokinaN") > -1;
+
+        // windows mobile
+        if (system.win == "CE") {
+            system.winMobile = system.win;
+        } else if (system.win == "Ph") {
+            if (/Window Phone OS (\d+.\d+)/.test(ua)) {
+                system.win = "Phone";
+                system.winMobile = parseFloat(RegExp["$1"]);
+            }
+        }
+
+        // 检测 iOS 版本
+        if (system.iphone && ua.indexOf("Mobile") > -1) {
+            if (/CPU (?:iPhone)?[ ]?OS (\d+_\d+)/.test(ua)) {
+                system.ios = parseFloat(RegExp.$1.replace("_", "."));
+            } else {
+                system.ios = 2; // 不能真正检测出来，所以只能猜测
+            }
+        }
+
+        // 检测 android 版本
+        if (/Android (\d+\.\d+)/.test(ua)) {
+            system.android = parseFloat(RegExp.$1);
+        }
+
+        // 游戏系统
+        system.wii = ua.indexOf("Wii") > -1;
+        system.ps = /playstation/i.test(ua);
+
+        // 返回对象
+        return {
+            engine: engine,
+            browser: browser,
+            system: system
+        }
+    })();
+    app.provider('WuBrowserChecker', [function () {
+        var self = this;
+        self.$get = [function () {
+            return window.weui_client_browser_checker;
+        }]
+    }]);
+
+})(angular.module('weui.core'), window);
 /**
  * Created by three on 16/1/13.
  */

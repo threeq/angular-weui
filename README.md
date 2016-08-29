@@ -2,8 +2,11 @@
 
 weui的angular组件版本。同时封装微信jssdk接口为angular服务。依赖：
 > angular 1.x
-> weui
+>
+> weui: [https://github.com/weui/weui](https://github.com/weui/weui)
+>
 > jquery
+>
 > 微信jssdk 1.1.0
 
 ### WuBrowserChecker
@@ -183,3 +186,35 @@ wu-click 是一个angular指令，提供事件点击服务，可以防止用户�
 ```
 
 # angular-weui 开发
+
+1. 克隆 angular-weui 工程
+
+```
+git clone git@github.com:threeq/angular-weui.git
+
+cd angular-weui
+```
+
+2. 安装工程依赖库
+
+```
+# npm 环境依赖
+npm intall
+
+# 使用 bower 安装angular-weui依赖库
+npm run bower
+```
+
+3. 启动工程
+
+```
+npm run dev serve
+```
+
+这时会自动启动浏览器打开 demo 界面,如果没有打开可以自己打开浏览器输入地址: http://localhost:3002/test.html
+
+4. 工程打包
+
+```
+npm run dev
+```

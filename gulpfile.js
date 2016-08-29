@@ -1,8 +1,8 @@
 'use strict';
 
 var gulp = require('gulp');
-gulp.appName = 'weui';
-gulp.moduleName = 'weui';
+gulp.appName = 'angular-weui';
+gulp.moduleName = 'angular-weui';
 gulp.paths = {
     src: 'src',
     dist: 'dist',
