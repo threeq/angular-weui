@@ -24,7 +24,7 @@ gulp.task('inject', ['styles'], function () {
     }})).pipe($.angularFilesort());
 
     var injectOptions = {
-        ignorePath: [paths.src, paths.tmp + '/serve'],
+        ignorePath: [paths.src, paths.tmp + '/serve', paths.test_server],
         addRootSlash: false
     };
 

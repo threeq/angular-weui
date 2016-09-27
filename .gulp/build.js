@@ -82,7 +82,7 @@ gulp.task('langs', function () {
 });
 
 gulp.task('clean', function (done) {
-  $.del([paths.dist + '/', paths.tmp + '/', paths.docs + '/', paths.reports + '/'], done);
+  $.del([paths.dist + '/', paths.tmp + '/', paths.reports + '/'], done);
 });
 
 gulp.task('build', ['js', 'styles:dest', 'images', 'fonts', 'misc','langs']);

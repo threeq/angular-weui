@@ -34,7 +34,7 @@ function browserSyncInit(baseDir, files, browser) {
     open: false,
      browser: browser
   }, function(){
-    var homepage = 'http://localhost:3002/test.html';
+    var homepage = 'http://localhost:3002/index.html';
     if(browser){
       //opn(homepage, {app: browser})
     }else{
@@ -53,7 +53,8 @@ gulp.task('serve', ['watch'], function () {
     paths.src + 'src/assets/images/**/*',
     paths.tmp + '/serve/*.html',
     paths.tmp + '/serve/{app,lib,components,common}/**/*.html',
-    paths.src + '/{app,lib,components,common}/**/*.html'
+    paths.src + '/{app,lib,components,common}/**/*.html',
+    paths.test_server + '/**/*.js'
   ]);
 });
 
@@ -79,4 +80,3 @@ gulp.task('serve:e2e', ['inject'], function () {
 gulp.task('serve:e2e-dist', ['build'], function () {
   browserSyncInit(paths.dist, null, []);
 });
-

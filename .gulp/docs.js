@@ -17,7 +17,7 @@ gulp.task('docs', ['clean'], function () {
         paths.src + '/js/**/*.js'
     ])
         .pipe($.jsdoc.parser())
-        .pipe($.jsdoc.generator('./docs'));
+        .pipe($.jsdoc.generator('./docs/api'));
         //.pipe($.jsdoc('./docs'));
 });
 

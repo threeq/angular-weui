@@ -4,7 +4,10 @@
   "scripts":{
     "bower": "bower install",
     "dev" : "gulp serve",
-    "dist": "gulp"
+    "dist": "gulp",
+    "docs": "gulp docs",
+    "demo": "gulp demo",
+    "gulp": "gulp"
   },
   "dependencies": {
 

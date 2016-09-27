@@ -10,7 +10,8 @@ gulp.paths = {
     e2e: 'test/e2e',
     unit: 'test/unit',
     test_server:'test/serve',
-    docs: 'docs',
+    docs: 'docs/api',
+    demo: 'docs',
     reports: 'reports'
 };
 
