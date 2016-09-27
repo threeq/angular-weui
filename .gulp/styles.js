@@ -19,7 +19,7 @@ gulp.task('css', function() {
 
 gulp.task('sass', function() {
     gulp.src([
-        paths.src + '/css/sass/app.scss'
+        paths.src + '/css/**/*.scss'
     ]).pipe($.plumber({errorHandler: function handleError(err) {
         console.error(err.toString());
         //this.emit('end');
@@ -53,7 +53,7 @@ gulp.task('less', function() {
         .pipe(gulp.dest(paths.tmp + '/serve/app/'));
 });
 
-gulp.task('styles', ['css', 'stylus'], function () {
+gulp.task('styles', ['css', 'stylus','sass'], function () {
 
     var lessOptions = {
         paths: [
@@ -98,4 +98,3 @@ gulp.task('styles', ['css', 'stylus'], function () {
         })
         .pipe(gulp.dest(paths.tmp + '/serve/app/'));
 });
-

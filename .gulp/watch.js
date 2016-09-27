@@ -12,6 +12,7 @@ gulp.task('watch', ['inject'], function () {
         paths.src + '/**/*.css',
         paths.src + '/**/*.less',
         paths.src + '/**/*.scss',
+        paths.src + '/**/*.styl',
         paths.test_server + '/*',
         paths.test_server + '/**/*.html',
         paths.test_server + '/**/*.js',

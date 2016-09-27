@@ -45,19 +45,19 @@
                 restrict:'A',
                 templateUrl:'weui/template/action-sheet/action-sheet.html',
                 link: function (scope, element, attrs) {
-                    var mask = element.find('.weui_mask_transition');
-                    var actionSheet = element.find('.weui_actionsheet');
+                    var mask = element.find('.weui-mask_transparent.actionsheet__mask');
+                    var actionSheet = element.find('.weui-actionsheet');
 
                     /**
                      * 打开初始化
                      */
                     (function () {
-                        mask.show().addClass('weui_fade_toggle').on('click',function () {
+                        mask.show().addClass('actionsheet__mask_show').on('click',function () {
                             closeActionSheetAnimate(actionSheet, mask).then(function () {
                                 scope.$dismiss('mask:click');
                             })
                         });
-                        actionSheet.addClass('weui_actionsheet_toggle');
+                        actionSheet.addClass('weui-actionsheet_toggle');
                     })();
 
                     /**
@@ -79,8 +79,8 @@
                      */
                     function closeActionSheetAnimate(actionSheet, mask) {
                         return $q(function (resovle, reject) {
-                            actionSheet.removeClass('weui_actionsheet_toggle');
-                            mask.removeClass('weui_fade_toggle');
+                            actionSheet.removeClass('weui-actionsheet_toggle');
+                            mask.removeClass('actionsheet__mask_show');
                             actionSheet.on('transitionend', function () {
                                 mask.hide();
                                 resovle();

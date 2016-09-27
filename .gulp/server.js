@@ -19,7 +19,7 @@ function browserSyncInit(baseDir, files, browser) {
   if(baseDir === paths.src || (util.isArray(baseDir) && baseDir.indexOf(paths.src) !== -1)) {
     routes = {
       '/bower_components': 'bower_components',
-      '/test/serve': paths.test_server
+      '/demo_js': paths.test_server+'/demo_js'
     };
   }
 
@@ -34,7 +34,7 @@ function browserSyncInit(baseDir, files, browser) {
     open: false,
      browser: browser
   }, function(){
-    var homepage = 'http://localhost:3002/index.html';
+    var homepage = 'http://localhost:3002/demo.html';
     if(browser){
       //opn(homepage, {app: browser})
     }else{
