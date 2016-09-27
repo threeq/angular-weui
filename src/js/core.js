@@ -969,4 +969,4 @@
         }]
     }]);
 
-})(angular.module('weui.core'), window);
+})(angular.module('ng.weui.core'), window);

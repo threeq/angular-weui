@@ -142,4 +142,4 @@
         return __server;
     }]);
 
-})(angular.module('weui.jssdk'), window);
+})(angular.module('ng.weui.jssdk'), window);

@@ -87,4 +87,4 @@
             };
         }])
     ;
-})(angular.module('weui.dialog'));
+})(angular.module('ng.weui.dialog'));

@@ -17,4 +17,4 @@
     // input-checkbox
     // input-radio
     // input-switch
-})(angular.module('weui.form'));
+})(angular.module('ng.weui.form'));

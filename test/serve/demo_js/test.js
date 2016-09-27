@@ -119,4 +119,4 @@
         };
 
     }])
-})(angular.module('test',['weui']));
+})(angular.module('test',['ng.weui']));

@@ -74,4 +74,4 @@
             }
         }];
     }])
-})(angular.module('weui.toast'));
+})(angular.module('ng.weui.toast'));

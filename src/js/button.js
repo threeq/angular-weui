@@ -34,4 +34,4 @@
             }
         }
     }])
-})(angular.module('weui.button'));
+})(angular.module('ng.weui.button'));

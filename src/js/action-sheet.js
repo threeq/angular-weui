@@ -94,4 +94,4 @@
             }
         }])
 ;
-})(angular.module('weui.actionsheet'));
+})(angular.module('ng.weui.actionsheet'));
