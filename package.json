@@ -2,11 +2,11 @@
   "name": "angular-weui",
   "version": "0.0.1",
   "scripts": {
-    "bower": "bower install",
+    "install:bower": "bower install",
     "dev": "gulp serve",
-    "dist": "gulp",
-    "docs": "gulp docs",
-    "demo": "gulp demo",
+    "build:dist": "gulp",
+    "build:docs": "gulp docs",
+    "build:demo": "gulp demo",
     "gulp": "gulp"
   },
   "dependencies": {},

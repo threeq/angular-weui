@@ -10,7 +10,7 @@ var $ = require('gulp-load-plugins')({
 
 gulp.task('partials', function () {
   return gulp.src([
-    paths.src + '/templates/**/*.html'
+    paths.src + '/**/*.html'
   ])
     .pipe($.minifyHtml({
       empty: true,
