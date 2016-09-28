@@ -24,8 +24,10 @@
 
 <a href="javascript:;" class="weui-btn weui-btn_primary" data-ng-click="testCtrl.actionSheet()">Action Sheet</a>
 <a href="javascript:;" class="weui-btn weui-btn_disabled weui-btn_primary" data-ng-click="testCtrl.confirm()">confirm</a>
+<a href="javascript:;" class="weui-btn weui-btn_disabled weui-btn_primary" data-ng-click="testCtrl.confirmNoTitle()">confirm no title</a>
 <a href="javascript:;" class="weui-btn weui-btn_warn" data-ng-click="testCtrl.alert()">alert</a>
 <a href="javascript:;" class="weui-btn weui-btn_warn" data-ng-click="testCtrl.dialog()">自定义按钮</a>
+<a href="javascript:;" class="weui-btn weui-btn_warn" data-ng-click="testCtrl.dialogAndroid()">自定义按钮 android</a>
 <a href="javascript:;" class="weui-btn weui-btn_disabled weui-btn_warn" data-ng-click="testCtrl.toastComplete()">Toast 完成</a>
 <a href="javascript:;" class="weui-btn weui-btn_default" data-ng-click="testCtrl.toastLoading()">Toast Loading</a>
 <a href="javascript:;" class="weui-btn weui-btn_default" data-ng-click="testCtrl.toastMessage()">Toast Message show</a>
@@ -33,18 +35,26 @@
 <a href="javascript:;" class="weui-btn weui-btn_default" data-wu-click="testCtrl.wuButtonTest()">按钮</a>
 <a href="javascript:;" class="weui-btn weui-btn_default" wu-interval="2000" wu-click="testCtrl.wuButtonTest1(testCtrl.testVar)">按钮</a>
 <h1>wuProgress </h1>
-<input type="text" data-ng-model="wuProgress">
+<input type="number" data-ng-model="testCtrl.wuProgress">
 <br>
-<div wu-progress="wuProgress"></div>
+<div wu-progress="testCtrl.wuProgress">
+    <i class="weui-icon-cancel" ng-if="testCtrl.wuProgress<100" data-ng-click="testCtrl.wuProgress=0;"></i>
+    <i class="weui-icon-success" ng-if="testCtrl.wuProgress>=100" data-ng-click="testCtrl.wuProgress=0;"></i>
+</div>
 <br>
-<div wu-progress="wuProgress" wu-color="'#ff33dd'" wu-height="12"></div>
-<br>
-<div class="button_sp_area">
-    <a href="javascript:;" class="weui-btn weui-btn_plain_default">按钮</a>
-    <a href="javascript:;" class="weui-btn weui-btn_plain_primary">按钮</a>
+<div wu-progress="testCtrl.wuProgress" wu-color="'#ff33dd'" wu-height="12">
+    <i class="weui-icon-success" data-ng-click="testCtrl.cancelProgress()"></i>
+</div>
 
+<br>
+<div class="button-sp-area" style="width: 60%;">
+    <a href="javascript:;" class="weui-btn weui-btn_plain-default">按钮</a>
+    <a href="javascript:;" class="weui-btn weui-btn_plain-default weui-btn_plain-disabled">按钮</a>
+    <a href="javascript:;" class="weui-btn weui-btn_plain-primary">按钮</a>
+    <a href="javascript:;" class="weui-btn weui-btn_plain-primary weui-btn_plain-disabled">按钮</a>
     <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary">按钮</a>
     <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_default">按钮</a>
+    <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_warn">按钮</a>
 </div>
 
 <!-- build:js({.,src,test/serve}) scripts/vendor.js -->

@@ -18,10 +18,14 @@
                         }
                     ];
 
+                    var template = 'wu-dialog-default-template';
+                    if(config.hasOwnProperty('template') && !!config.template) {
+                        template = config.template;
+                    }
                     return $wuModal.open({
                         backdrop: false,
                         windowTemplateUrl: 'weui/template/wu-window.html',
-                        template: '<div wu-dialog-default-template></div>',
+                        template: '<div '+template+'></div>',
                         controller: ['$scope', function ($scope) {
                             $scope.title = config.title;
                             $scope.content = config.content;
@@ -65,25 +69,34 @@
                 }
             }
         }];
-    }])
-        .directive('wuDialogDefaultTemplate', [function () {
+    }]);
+
+    var linkFunction = function (scope, element, attrs) {
+        var mask = element.find('.weui-mask');
+        mask.on('click', function () {
+            scope.$apply(function () {
+                scope.$dismiss('mask:click');
+            });
+        });
+
+        var openedClass = 'weui-dialog__alert';
+        if(scope.buttons.length>1) {
+            openedClass= 'weui-dialog__confirm'
+        }
+        element.addClass(openedClass).find('.weui-dialog__bd').html(scope.content);
+    }
+    app.directive('wuDialogDefaultTemplate', [function () {
             return {
                 restrict: 'A',
                 templateUrl: 'weui/template/dialog/default.html',
-                link: function (scope, element, attrs) {
-                    var mask = element.find('.weui_mask');
-                    mask.on('click', function () {
-                        scope.$apply(function () {
-                            scope.$dismiss('mask:click');
-                        });
-                    });
-
-                    var openedClass = 'weui_dialog_alert';
-                    if(scope.buttons.length>1) {
-                        openedClass= 'weui_dialog_confirm'
-                    }
-                    element.addClass(openedClass).find('.weui_dialog_bd').html(scope.content);
-                }
+                link: linkFunction
+            };
+        }])
+        .directive('wuDialogAndroidTemplate', [function () {
+            return {
+                restrict: 'A',
+                templateUrl: 'weui/template/dialog/android.html',
+                link: linkFunction
             };
         }])
     ;

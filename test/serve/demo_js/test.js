@@ -52,7 +52,16 @@
         this.confirm = function () {
             WuDialog.confirm({
                 title: '确认框',
-                content: '<div style="color: red;">xxxx确认内容<div>'
+                content: 'xxxx确认内容sfsfsdfsadfsadfdsafdsafsdaf'
+            }).result.then(function () {
+                    console.log('ok');
+                }, function () {
+                    console.log('cancel')
+                });
+        };
+        this.confirmNoTitle = function () {
+            WuDialog.confirm({
+                content: 'sfsafsfsasadfsfsfsfasfas'
             }).result.then(function () {
                     console.log('ok');
                 }, function () {
@@ -88,6 +97,23 @@
                 })
         };
 
+        this.dialogAndroid = function () {
+            WuDialog.open({
+                title:'自定义按钮',
+                content:'自定义按钮测试',
+                template: 'wu-dialog-android-template',
+                buttons:[
+                    { action:'ok', title:'btn1', class: 'default', value:'btn1' },
+                    { action:'ok', title:'btn2', class: 'primary', value:'btn2' },
+                    { action:'cancel', title:'btn3', class: 'default', value:'btn3' },
+                    { action:'cancel', title:'btn4', class: 'primary', value:'btn4' }
+                ]
+            }).result.then(function () {
+                    console.log("OK: ", arguments[0])
+                },function () {
+                    console.log("Cancel: ", arguments[0])
+                })
+        }
         this.toastComplete = function () {
             WuToast.complete({
                 time:1000
@@ -118,5 +144,8 @@
             console.log('000000000000000', data);
         };
 
+        this.cancelProgress = function () {
+            this.wuProgress = 50;
+        }
     }])
 })(angular.module('test',['ng.weui']));
