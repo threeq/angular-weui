@@ -9,6 +9,30 @@ weui的angular组件版本。同时封装微信jssdk接口为angular服务。依
 >
 > 微信jssdk 1.1.0
 
+# TODO list
+
+1. [x] 核心组件
+> * 浏览器检测组件
+
+1. [x] actionsheet 组件
+1. [x] dialog 组件
+1. [x] toast 组件
+1. [x] wu-click 组件：防止重复点击
+1. [x] 进度条组件
+1. [ ] loading 组件
+1. [ ] 图片预览组件
+
+1. [ ] 表单组件
+> * 图片上传
+> * 文本输入
+> * 单选
+> * 多选
+> * 开关按钮
+> * 文本域
+> * 选择
+
+# api说明
+
 ### WuBrowserChecker
 
 客户端检测.支持android/ios/window版本微信客户端,mac/linux/window平台上的各种浏览器检测.
