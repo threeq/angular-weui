@@ -193,9 +193,12 @@ wu-progress 是一个angular指令，提供进度条显示。
 
 ```html
 <h1>wuProgress </h1>
-<input type="text" data-ng-model="wuProgress">
+<input type="number" data-ng-model="wuProgress">
 
-<div wu-progress="wuProgress"></div>
+<div wu-progress="testCtrl.wuProgress">
+    <i class="weui-icon-cancel" ng-if="testCtrl.wuProgress<100" data-ng-click="testCtrl.wuProgress=0;"></i>
+    <i class="weui-icon-success" ng-if="testCtrl.wuProgress>=100" data-ng-click="testCtrl.wuProgress=0;"></i>
+</div>
 <div wu-progress="wuProgress" wu-color="'#ff33dd'" wu-height="12"></div>
 ```
 
@@ -204,9 +207,10 @@ wu-progress 是一个angular指令，提供进度条显示。
 wu-click 是一个angular指令，提供事件点击服务，可以防止用户快速点击按钮。
 
 ```html
-<h1>button test</h1>
-<a href="javascript:;" class="weui_btn weui_btn_default" data-wu-click="testCtrl.wuButtonTest()">按钮</a>
-<a href="javascript:;" class="weui_btn weui_btn_default" wu-interval="2000" wu-click="testCtrl.wuButtonTest1(testCtrl.testVar)">按钮</a>
+<h1>button  wu-click test</h1>
+<a href="javascript:;" class="weui-btn weui-btn_default" data-wu-click="testCtrl.wuButtonTest()">按钮</a>
+<a href="javascript:;" class="weui-btn weui-btn_default" wu-interval="2000" wu-click="testCtrl.wuButtonTest1(testCtrl.testVar)">按钮</a>
+
 ```
 
 # angular-weui 开发
