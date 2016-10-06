@@ -15,21 +15,23 @@ weui的angular组件版本。同时封装微信jssdk接口为angular服务。依
 > * 浏览器检测组件
 
 1. [x] actionsheet 组件
+
 1. [x] dialog 组件
+> * alert
+> * confirm
+
 1. [x] toast 组件
+> * loading
+> * complete
+> * show message
+
 1. [x] wu-click 组件：防止重复点击
 1. [x] 进度条组件
-1. [ ] loading 组件
 1. [ ] 图片预览组件
 
 1. [ ] 表单组件
 > * 图片上传
-> * 文本输入
-> * 单选
-> * 多选
-> * 开关按钮
 > * 文本域
-> * 选择
 
 # api说明
 

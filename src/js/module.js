@@ -13,6 +13,7 @@ angular.module('ng.weui.dialog',['ng.weui.core']);
 angular.module('ng.weui.actionsheet',['ng.weui.core']);
 angular.module('ng.weui.toast',['ng.weui.core']);
 angular.module('ng.weui.form',['ng.weui.core']);
+angular.module('ng.weui.gallery',['ng.weui.core']);
 angular.module('ng.weui',[
     'ng.weui.core',
     'ng.weui.button',
@@ -20,5 +21,6 @@ angular.module('ng.weui',[
     'ng.weui.dialog',
     'ng.weui.toast',
     'ng.weui.form',
+    'ng.weui.gallery',
     'ng.weui.progress'
 ]);
