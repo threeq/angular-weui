@@ -665,7 +665,8 @@
                         var modalClosedDeferred = $q.defer();
                         var modalRenderDeferred = $q.defer();
 
-                        //prepare an instance of a modal to be injected into controllers and returned to a caller
+                        //prepare an instance of a modal to be injected into controllers and
+                        // returned to a caller
                         var modalInstance = {
                             result: modalResultDeferred.promise,
                             opened: modalOpenedDeferred.promise,
@@ -697,9 +698,10 @@
                         }
 
                         // Wait for the resolution of the existing promise chain.
-                        // Then switch to our own combined promise dependency (regardless of how the previous modal fared).
-                        // Then add to $modalStack and resolve opened.
-                        // Finally clean up the chain variable if no subsequent modal has overwritten it.
+                        // Then switch to our own combined promise dependency (regardless of how
+                        // the previous modal fared). Then add to $modalStack and resolve opened.
+                        // Finally clean up the chain variable if no subsequent modal has
+                        // overwritten it.
                         var samePromise;
                         samePromise = promiseChain = $q.all([promiseChain])
                             .then(resolveWithTemplate, resolveWithTemplate)
@@ -968,5 +970,24 @@
             return window.weui_client_browser_checker;
         }]
     }]);
+
+    app.provider('IdWorkerFactory',[function () {
+        var factories = {};
+        this.new = function IdWorkerFactory(prefix) {
+            if(!factories.hasOwnProperty(prefix)) {
+                factories[prefix] = (function (p) {
+                    var count = 0;
+                    return function () {
+                        return p+'_'+(count++);
+                    }
+                })(prefix);
+            }
+            return factories[prefix];
+        };
+
+        this.$get = [function() {
+            return this;
+        }]
+    }])
 
 })(angular.module('ng.weui.core'), window);

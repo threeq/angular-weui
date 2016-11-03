@@ -1,8 +1,31 @@
-<div class="weui-gallery" data-ng-click="clickElement($event)">
-    <span class="weui-gallery__img" style="background-image: url(./images/pic_article.png);"></span>
-    <div class="weui-gallery__opr">
-        <a data-ng-click="clickBtn($event)" class="weui-gallery__del">
-            <i class="weui-icon-delete weui-icon_gallery-delete"></i>
-        </a>
+<div class="weui-page" data-ng-click="clickElement($event)">
+
+    <!--<div class="weui-gallery__opr">-->
+        <!--<a data-ng-click="clickBtn($event)" class="weui-gallery__del">-->
+        <!--<i class="weui-icon-delete weui-icon_gallery-delete"></i>-->
+        <!--</a>-->
+    <!--</div>-->
+
+    <!-- Swiper -->
+    <div class="weui-gallery_swiper">
+        <div class="swiper-container swiper-images" data-ng-class="{'gallery-top':showThumb}">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" data-ng-repeat="img in images track by $index">
+                    <span class="weui-gallery__img" data-ng-style="{{imageStyle(img)}}">
+                    </span>
+                </div>
+            </div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next swiper-button-white"></div>
+            <div class="swiper-button-prev swiper-button-white"></div>
+        </div>
+        <div class="swiper-container gallery-thumbs" data-ng-if="showThumb">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" data-ng-repeat="img in images track by $index"
+                     data-ng-style="{{imageStyle(img)}}"></div>
+            </div>
+        </div>
+
     </div>
+
 </div>
