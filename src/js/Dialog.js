@@ -1,5 +1,8 @@
 /**
  * Created by three on 16/1/13.
+ *
+ * 目前 `WuDialog` 并不是安全的，需要调用者控制输出的 html 代码防止 xss
+ * 可以参考：https://github.com/leizongmin/js-xss
  */
 
 (function (app) {
@@ -83,7 +86,7 @@
         if(scope.buttons.length>1) {
             openedClass= 'weui-dialog__confirm'
         }
-        element.addClass(openedClass).find('.weui-dialog__bd').html(scope.content);
+        element.addClass(openedClass);
     }
     app.directive('wuDialogDefaultTemplate', [function () {
             return {
@@ -100,4 +103,40 @@
             };
         }])
     ;
+    /**
+     * 表格数据 html 输出
+     * 这个会有 xss 风险
+     */
+    app.directive('unsafeShowHtml', function ($compile,$sce) {
+      "ngInject";
+
+      /**
+       * html 编码，html源码输出
+       * @param {[type]} html [description]
+       */
+      function HTMLEncode(html) {
+        var temp = document.createElement("div");
+        (temp.textContent != null) ? (temp.textContent = html) : (temp.innerText = html);
+        var output = temp.innerHTML;
+        temp = null;
+        return output;
+      }
+
+      return {
+        restrict: 'A',
+        scope: {
+          content: '=unsafeShowHtml'
+        },
+        link: function (scope, element, attrs) {
+
+          var change = function () {
+              var showHtml = '<div>'+scope.content+'</div>';
+              element.html('').append($compile(showHtml)(scope));
+          };
+          //scope.$watch('content', function () {
+          change();
+          //});
+        }
+      }
+    });
 })(angular.module('ng.weui.dialog'));

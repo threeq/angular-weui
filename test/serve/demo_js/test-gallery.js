@@ -41,4 +41,4 @@
             },
         ];
     }])
-})(angular.module('test',['ng.weui']));
+})(angular.module('test.gallery',['ng.weui']));
