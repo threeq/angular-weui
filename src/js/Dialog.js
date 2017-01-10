@@ -107,8 +107,7 @@
      * 表格数据 html 输出
      * 这个会有 xss 风险
      */
-    app.directive('unsafeShowHtml', function ($compile,$sce) {
-      "ngInject";
+    app.directive('unsafeShowHtml', ['$compile', function ($compile) {
 
       /**
        * html 编码，html源码输出
@@ -138,5 +137,5 @@
           //});
         }
       }
-    });
+  }]);
 })(angular.module('ng.weui.dialog'));
