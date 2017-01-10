@@ -6,6 +6,10 @@ angular.module('ng.weui.core',[]);
  * 企业号/服务号jssdk封装
  */
 angular.module('ng.weui.jssdk',[]);
+/**
+ * swiper 封装
+ */
+angular.module('ng.weui.swiper', ['ng.weui.core']);
 
 angular.module('ng.weui.button',[]);
 angular.module('ng.weui.progress',[]);
@@ -13,6 +17,8 @@ angular.module('ng.weui.dialog',['ng.weui.core']);
 angular.module('ng.weui.actionsheet',['ng.weui.core']);
 angular.module('ng.weui.toast',['ng.weui.core']);
 angular.module('ng.weui.form',['ng.weui.core']);
+angular.module('ng.weui.gallery',['ng.weui.core', 'ng.weui.swiper']);
+angular.module('ng.weui.loading',['ng.weui.core']);
 angular.module('ng.weui',[
     'ng.weui.core',
     'ng.weui.button',
@@ -20,13 +26,19 @@ angular.module('ng.weui',[
     'ng.weui.dialog',
     'ng.weui.toast',
     'ng.weui.form',
+    'ng.weui.gallery',
+    'ng.weui.loading',
     'ng.weui.progress'
 ]);
 
 angular.module("ng.weui").run(["$templateCache", function($templateCache) {$templateCache.put("weui/template/wu-window.html","<div wu-modal-transclude=\"\"></div>");
 $templateCache.put("weui/template/action-sheet/action-sheet.html","<div class=\"weui-mask_transparent actionsheet__mask\" style=\"display: none; transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);\"></div><div class=\"weui-actionsheet\"><div data-ng-class=\"{\'weui-actionsheet__menu\':$first, \'weui-actionsheet__action\':!$first}\" data-ng-repeat=\"group in btnGroups\"><div class=\"weui-actionsheet__cell\" data-ng-click=\"clickBtn(group, btn)\" data-ng-repeat=\"btn in group.buttons\">{{btn.title}}</div></div></div>");
-$templateCache.put("weui/template/dialog/android.html","<div><div class=\"weui-mask\"></div><div class=\"weui-dialog weui-skin_android\"><div class=\"weui-dialog__hd\" data-ng-if=\"title\"><strong class=\"weui-dialog__title\" data-ng-bind=\"title\"></strong></div><div class=\"weui-dialog__bd\"></div><div class=\"weui-dialog__ft\"><a href=\"javascript:;\" class=\"weui-dialog__btn {{btn.class}}\" data-ng-repeat=\"btn in buttons\" data-ng-bind=\"btn.title\" data-ng-click=\"clickBtn(btn)\"></a></div></div></div>");
-$templateCache.put("weui/template/dialog/default.html","<div><div class=\"weui-mask\"></div><div class=\"weui-dialog\"><div class=\"weui-dialog__hd\" data-ng-if=\"title\"><strong class=\"weui-dialog__title\" data-ng-bind=\"title\"></strong></div><div class=\"weui-dialog__bd\"></div><div class=\"weui-dialog__ft\"><a href=\"javascript:;\" class=\"weui-dialog__btn {{btn.class}}\" data-ng-repeat=\"btn in buttons\" data-ng-bind=\"btn.title\" data-ng-click=\"clickBtn(btn)\"></a></div></div></div>");
+$templateCache.put("weui/template/dialog/android.html","<div><div class=\"weui-mask\"></div><div class=\"weui-dialog weui-skin_android\"><div class=\"weui-dialog__hd\" data-ng-if=\"title\"><strong class=\"weui-dialog__title\" data-ng-bind=\"title\"></strong></div><div class=\"weui-dialog__bd\" unsafe-show-html=\"content\"></div><div class=\"weui-dialog__ft\"><a href=\"javascript:;\" class=\"weui-dialog__btn {{btn.class}}\" data-ng-repeat=\"btn in buttons\" data-ng-bind=\"btn.title\" data-ng-click=\"clickBtn(btn)\"></a></div></div></div>");
+$templateCache.put("weui/template/dialog/default.html","<div><div class=\"weui-mask\"></div><div class=\"weui-dialog\"><div class=\"weui-dialog__hd\" data-ng-if=\"title\"><strong class=\"weui-dialog__title\" data-ng-bind=\"title\"></strong></div><div class=\"weui-dialog__bd\" unsafe-show-html=\"content\"></div><div class=\"weui-dialog__ft\"><a href=\"javascript:;\" class=\"weui-dialog__btn {{btn.class}}\" data-ng-repeat=\"btn in buttons\" data-ng-bind=\"btn.title\" data-ng-click=\"clickBtn(btn)\"></a></div></div></div>");
+$templateCache.put("weui/template/form/input-image.html","<div class=\"weui-cell\"><div class=\"weui-cell__bd\"><div class=\"weui-uploader\"><div class=\"weui-uploader__hd\"><p class=\"weui-uploader__title\">图片上传</p><div class=\"weui-uploader__info\">0/2</div></div><div class=\"weui-uploader__bd\"><ul class=\"weui-uploader__files\" id=\"uploaderFiles\"><li class=\"weui-uploader__file\" style=\"background-image:url(./images/pic_160.png)\"></li><li class=\"weui-uploader__file\" style=\"background-image:url(./images/pic_160.png)\"></li><li class=\"weui-uploader__file\" style=\"background-image:url(./images/pic_160.png)\"></li><li class=\"weui-uploader__file weui-uploader__file_status\" style=\"background-image:url(./images/pic_160.png)\"><div class=\"weui-uploader__file-content\" status=\"error\"><i class=\"weui-icon-warn\"></i></div><div class=\"weui-uploader__file-content\" status=\"progress\">50%</div></li></ul><div class=\"weui-uploader__input-box\"><input id=\"uploaderInput\" class=\"weui-uploader__input\" type=\"file\" accept=\"image/*\" multiple=\"\"></div></div></div></div></div>");
+$templateCache.put("weui/template/form/input-textarea.html","<div class=\"weui-cell\"><div class=\"weui-cell__bd\"><textarea class=\"weui-textarea\" placeholder=\"请输入文本\" rows=\"3\"></textarea><div class=\"weui-textarea-counter\"><span>0</span>/200</div></div></div>");
+$templateCache.put("weui/template/gallery/gallery.html","<div class=\"weui-page\" data-ng-click=\"clickElement($event)\"><div class=\"weui-gallery_swiper\"><div class=\"swiper-container swiper-images\" data-ng-class=\"{\'gallery-top\':showThumb}\"><div class=\"swiper-wrapper\"><div class=\"swiper-slide\" data-ng-repeat=\"img in images track by $index\"><span class=\"weui-gallery__img\" data-ng-style=\"{{imageStyle(img)}}\"></span></div></div><div class=\"swiper-button-next swiper-button-white\"></div><div class=\"swiper-button-prev swiper-button-white\"></div></div><div class=\"swiper-container gallery-thumbs\" data-ng-if=\"showThumb\"><div class=\"swiper-wrapper\"><div class=\"swiper-slide\" data-ng-repeat=\"img in images track by $index\" data-ng-style=\"{{imageStyle(img)}}\"></div></div></div></div></div>");
+$templateCache.put("weui/template/loading/loading.html","<div class=\"page__bd\"><div class=\"weui-loadmore\"><i class=\"weui-loading\"></i> <span class=\"weui-loadmore__tips\">正在加载</span></div><div class=\"weui-loadmore weui-loadmore_line\"><span class=\"weui-loadmore__tips\">暂无数据</span></div><div class=\"weui-loadmore weui-loadmore_line weui-loadmore_dot\"><span class=\"weui-loadmore__tips\"></span></div><div data-ng-transclude=\"\"></div></div>");
 $templateCache.put("weui/template/toast/complete.html","<div class=\"weui-mask_transparent\"></div><div class=\"weui-toast\"><i class=\"weui-icon-success-no-circle weui-icon_toast\"></i><p class=\"weui-toast__content\" data-ng-bind=\"message\"></p></div>");
 $templateCache.put("weui/template/toast/loading.html","<div class=\"weui-mask_transparent\"></div><div class=\"weui-toast\"><i class=\"weui-loading weui-icon_toast\"></i><p class=\"weui-toast__content\" data-ng-bind=\"message\"></p></div>");
 $templateCache.put("weui/template/toast/message.html","<div class=\"weui-mask_transparent\"></div><div class=\"weui-toast wu_toast_message\"><div data-ng-bind=\"message\"></div></div>");}]);
@@ -299,6 +311,318 @@ $templateCache.put("weui/template/toast/message.html","<div class=\"weui-mask_tr
 })(angular.module('ng.weui.progress'));
 
 /**
+ *
+ * @Date 2016/11/3
+ * @User three
+ */
+
+(function(window, app, undefined) {
+
+    'use strict';
+
+    app
+        .directive('wuSwiperContainer', ['IdWorkerFactory', function (IdWorkerFactory) {
+            var IdWorker = IdWorkerFactory('wuSwiperContainer');
+            return {
+                restrict: 'E',
+                transclude: true,
+                scope: {
+                    onReady: '&',
+                    slidesPerView: '=',
+                    slidesPerColumn: '=',
+                    spaceBetween: '=',
+                    parallax: '=',
+                    parallaxTransition: '@',
+                    paginationIsActive: '=',
+                    paginationClickable: '=',
+                    showNavButtons: '=',
+                    showScrollBar: '=',
+                    loop: '=',
+                    autoplay: '=',
+                    initialSlide: '=',
+                    containerCls: '@',
+                    wrapperCls: '@',
+                    paginationCls: '@',
+                    slideCls: '@',
+                    direction: '@',
+                    swiper: '=',
+                    overrideParameters: '='
+                },
+                controller: function($scope, $element, $timeout) {
+                    var uuid = IdWorker();
+
+                    $scope.swiper_uuid = uuid;
+
+                    // directive defaults
+                    var params = {
+                        slidesPerView: $scope.slidesPerView || 1,
+                        slidesPerColumn: $scope.slidesPerColumn || 1,
+                        spaceBetween: $scope.spaceBetween || 0,
+                        direction: $scope.direction || 'horizontal',
+                        loop: $scope.loop || false,
+                        initialSlide: $scope.initialSlide || 0,
+                        showNavButtons: false
+                    };
+
+                    if (!angular.isUndefined($scope.autoplay) && typeof $scope.autoplay === 'number') {
+                        params = angular.extend({}, params, {
+                            autoplay: $scope.autoplay
+                        });
+                    }
+
+                    if ($scope.paginationIsActive === true) {
+                        params = angular.extend({}, params, {
+                            paginationClickable: $scope.paginationClickable || true,
+                            pagination: '#paginator-' + $scope.swiper_uuid
+                        });
+                    }
+
+                    if ($scope.showNavButtons === true) {
+                        params.nextButton = '#nextButton-' + $scope.swiper_uuid;
+                        params.prevButton = '#prevButton-' + $scope.swiper_uuid;
+                    }
+
+                    if ($scope.showScrollBar === true) {
+                        params.scrollbar = '#scrollBar-' + $scope.swiper_uuid;
+                    }
+
+                    if ($scope.overrideParameters) {
+                        params = angular.extend({}, params, $scope.overrideParameters);
+                    }
+
+                    $timeout(function() {
+                        var swiper = null;
+
+                        if (angular.isObject($scope.swiper)) {
+                            $scope.swiper = new Swiper($element[0].firstChild, params);
+                            swiper = $scope.swiper;
+                        } else {
+                            swiper = new Swiper($element[0].firstChild, params);
+                        }
+
+                        //If specified, calls this function when the swiper object is available
+                        if (!angular.isUndefined($scope.onReady)) {
+                            $scope.onReady({
+                                               swiper: swiper
+                                           });
+                        }
+                    });
+                },
+
+                link: function(scope, element) {
+
+                    var uuid = scope.swiper_uuid;
+
+                    var paginatorId = "paginator-" + uuid;
+                    var prevButtonId = "prevButton-" + uuid;
+                    var nextButtonId = "nextButton-" + uuid;
+                    var scrollBarId = 'scrollBar-' + uuid;
+
+                    var containerElement = element[0];
+
+                    angular.element(containerElement.querySelector('.swiper-pagination'))
+                        .attr('id', paginatorId);
+
+                    angular.element(containerElement.querySelector('.swiper-button-next'))
+                        .attr('id', nextButtonId);
+
+                    angular.element(containerElement.querySelector('.swiper-button-prev'))
+                        .attr('id', prevButtonId);
+
+                    angular.element(element[0].querySelector('.swiper-scrollbar'))
+                        .attr('id', scrollBarId);
+                },
+
+                template: '<div class="swiper-container {{containerCls}}">' +
+                          '<div class="parallax-bg" data-swiper-parallax="{{parallaxTransition}}" ng-show="parallax"></div>' +
+                          '<div class="swiper-wrapper {{wrapperCls}}" ng-transclude></div>' +
+                          '<div class="swiper-pagination {{paginationCls}}"></div>' +
+                          '<div class="swiper-button-next" ng-show="showNavButtons"></div>' +
+                          '<div class="swiper-button-prev" ng-show="showNavButtons"></div>' +
+                          '<div class="swiper-scrollbar" ng-show="showScrollBar"></div>' +
+                          '</div>'
+            };
+        }])
+        .directive('wuSwiperSlide', [function SwiperSlide() {
+            return {
+                restrict: 'E',
+                require: '^ksSwiperContainer',
+                transclude: true,
+                scope: {
+                    sliderCls: '@',
+                },
+                template: '<div class="swiper-slide {{sliderCls}}" ng-transclude></div>',
+                replace: true
+            };
+        }]);
+
+})(window, angular.module('ng.weui.swiper'), undefined);
+/**
+ *
+ * @Date 16/10/6
+ * @User three
+ */
+
+(function(app){
+    app.directive('loadingEnable', [function () {
+        return {
+            restrict: 'A',
+            replace:true,
+            templateUrl: 'weui/template/loading/loading.html',
+            transclude:true,
+            link: function ($scope, $element, $attrs) {
+
+            }
+        }
+    }])
+})(angular.module('ng.weui.loading'), window);
+/**
+ *
+ * @Date 16/10/6
+ * @User three
+ */
+
+(function (app) {
+    /**
+     * 调用微信js api 演示图片预览
+     */
+    app.factory('PreviewImages', ['WuWxJsSdk', function (WuWxJsSdk) {
+        return {
+            show: function (current, imgList) {
+                WuWxJsSdk.previewImage({
+                                           current: current,
+                                           urls: imgList
+                                       });
+            }
+        }
+    }]);
+    /**
+     * 调用微信js api 演示图片预览指令
+     */
+    app.directive('previewImages', ['PreviewImages', function (PreviewImages) {
+        return {
+            restrict: 'AE',
+            link: function (scope, element, attrs) {
+                var box = element;
+                var selector = attrs.preview? attrs.preview : 'img';
+                var attrName = attrs.attrName? attrs.attrName : 'src';
+
+                element.on('click', selector, function (e) {
+                    var src = $(this),
+                        imgList = [];
+                    box.find(selector).each(function (index,item) {
+                        imgList.push(item.attr(attrName));
+                    });
+
+                    PreviewImages.show(src.attr(attrName), imgList);
+
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                });
+            }
+        }
+    }]);
+
+    /**
+     * h5 实现预览功能
+     */
+    app.directive('gallery', ['$timeout','IdWorkerFactory', function ($timeout,IdWorkerFactory) {
+
+        var galleryIdWorker = IdWorkerFactory.new('weui-gallery_swiper');
+
+        return {
+            restrict: 'EA',
+            //replace: true,
+            templateUrl: 'weui/template/gallery/gallery.html',
+            scope: {
+                images: "="
+            },
+            link: function (scope, element, attrs) {
+
+                var galleryId = galleryIdWorker();
+                element.attr("id", galleryId);
+                element.addClass("weui-gallery");
+
+                element.show();
+                //scope.clickElement = function () {
+                //    element.hide();
+                //};
+
+                ///**
+                // * 用户操作回调
+                // */
+                //scope.clickBtn = function (e) {
+                //    scope.action && scope.action({
+                //                                     image: scope.image
+                //                                 });
+                //    e.preventDefault();
+                //};
+
+                /**
+                 * 显示缩略图
+                 * @type {boolean}
+                 */
+                scope.showThumb = false;
+                if(angular.isArray(scope.images) && scope.images.length>0) {
+
+                    if(scope.images[0].hasOwnProperty('thumb')) {
+                        scope.showThumb = true;
+                    }
+
+                    initSwiper();
+                }
+
+                scope.imageStyle = function (image) {
+                  return {
+                      'background-image': 'url('+image.url+')'
+                  }
+                };
+
+                function initSwiper() {
+
+                    $timeout(function () {
+                        console.log('#'+galleryId+' .swiper-images');
+
+                        var galleryTop = new Swiper('#'+galleryId+' .swiper-images', {
+                            nextButton: '.swiper-button-next',
+                            prevButton: '.swiper-button-prev',
+                            spaceBetween: 10,
+                            effect: 'coverflow',
+                            grabCursor: true,
+                            centeredSlides: true,
+                            slidesPerView: 'auto',
+                            coverflow: {
+                                rotate: 50,
+                                stretch: 0,
+                                depth: 100,
+                                modifier: 1,
+                                slideShadows : true
+                            }
+                        });
+
+                        if(scope.showThumb) {
+                            var galleryThumbs = new Swiper('#'+galleryId+' .gallery-thumbs', {
+                                spaceBetween: 10,
+                                centeredSlides: true,
+                                slidesPerView: 'auto',
+                                touchRatio: 0.2,
+                                slideToClickedSlide: true
+                            });
+                            galleryTop.params.control = galleryThumbs;
+                            galleryThumbs.params.control = galleryTop;
+                        }
+
+                    },10)
+                }
+
+            }
+        }
+    }])
+})(angular.module('ng.weui.gallery'));
+
+
+/**
  * 常用form组件封装,包含表单验证
  */
 (function (app) {
@@ -317,10 +641,48 @@ $templateCache.put("weui/template/toast/message.html","<div class=\"weui-mask_tr
     // input-checkbox
     // input-radio
     // input-switch
+    /**
+     * TODO 还不知道是否必要 form 组件
+     */
+    app.directive('inputTextarea',[function () {
+
+        return {
+            restrict:'EA',
+            replace: true,
+            templateUrl:'weui/template/form/input-textarea.html',
+            require:'ngModel',
+            link: function(scope, element, attrs, ngModelCtrl) {
+                ngModelCtrl.$render = function() {
+                    console.log()
+                }
+            }
+        }
+    }]);
+
+    /**
+     * 微信上传图片
+     * TODO 需要识别微信手机端和微信pc端,需要微信jssdk支持
+     */
+    app.directive('inputImage', [function () {
+        return {
+            restrict:'EA',
+            replace: true,
+            templateUrl:'weui/template/form/input-image.html',
+            require:'ngModel',
+            link: function(scope, element, attrs, ngModelCtrl) {
+                ngModelCtrl.$render = function() {
+                    console.log()
+                }
+            }
+        }
+    }])
 })(angular.module('ng.weui.form'));
 
 /**
  * Created by three on 16/1/13.
+ *
+ * 目前 `WuDialog` 并不是安全的，需要调用者控制输出的 html 代码防止 xss
+ * 可以参考：https://github.com/leizongmin/js-xss
  */
 
 (function (app) {
@@ -404,7 +766,7 @@ $templateCache.put("weui/template/toast/message.html","<div class=\"weui-mask_tr
         if(scope.buttons.length>1) {
             openedClass= 'weui-dialog__confirm'
         }
-        element.addClass(openedClass).find('.weui-dialog__bd').html(scope.content);
+        element.addClass(openedClass);
     }
     app.directive('wuDialogDefaultTemplate', [function () {
             return {
@@ -421,6 +783,41 @@ $templateCache.put("weui/template/toast/message.html","<div class=\"weui-mask_tr
             };
         }])
     ;
+    /**
+     * 表格数据 html 输出
+     * 这个会有 xss 风险
+     */
+    app.directive('unsafeShowHtml', ['$compile', function ($compile) {
+
+      /**
+       * html 编码，html源码输出
+       * @param {[type]} html [description]
+       */
+      function HTMLEncode(html) {
+        var temp = document.createElement("div");
+        (temp.textContent != null) ? (temp.textContent = html) : (temp.innerText = html);
+        var output = temp.innerHTML;
+        temp = null;
+        return output;
+      }
+
+      return {
+        restrict: 'A',
+        scope: {
+          content: '=unsafeShowHtml'
+        },
+        link: function (scope, element, attrs) {
+
+          var change = function () {
+              var showHtml = '<div>'+scope.content+'</div>';
+              element.html('').append($compile(showHtml)(scope));
+          };
+          //scope.$watch('content', function () {
+          change();
+          //});
+        }
+      }
+  }]);
 })(angular.module('ng.weui.dialog'));
 
 /**
@@ -1090,7 +1487,8 @@ $templateCache.put("weui/template/toast/message.html","<div class=\"weui-mask_tr
                         var modalClosedDeferred = $q.defer();
                         var modalRenderDeferred = $q.defer();
 
-                        //prepare an instance of a modal to be injected into controllers and returned to a caller
+                        //prepare an instance of a modal to be injected into controllers and
+                        // returned to a caller
                         var modalInstance = {
                             result: modalResultDeferred.promise,
                             opened: modalOpenedDeferred.promise,
@@ -1122,9 +1520,10 @@ $templateCache.put("weui/template/toast/message.html","<div class=\"weui-mask_tr
                         }
 
                         // Wait for the resolution of the existing promise chain.
-                        // Then switch to our own combined promise dependency (regardless of how the previous modal fared).
-                        // Then add to $modalStack and resolve opened.
-                        // Finally clean up the chain variable if no subsequent modal has overwritten it.
+                        // Then switch to our own combined promise dependency (regardless of how
+                        // the previous modal fared). Then add to $modalStack and resolve opened.
+                        // Finally clean up the chain variable if no subsequent modal has
+                        // overwritten it.
                         var samePromise;
                         samePromise = promiseChain = $q.all([promiseChain])
                             .then(resolveWithTemplate, resolveWithTemplate)
@@ -1393,6 +1792,25 @@ $templateCache.put("weui/template/toast/message.html","<div class=\"weui-mask_tr
             return window.weui_client_browser_checker;
         }]
     }]);
+
+    app.provider('IdWorkerFactory',[function () {
+        var factories = {};
+        this.new = function IdWorkerFactory(prefix) {
+            if(!factories.hasOwnProperty(prefix)) {
+                factories[prefix] = (function (p) {
+                    var count = 0;
+                    return function () {
+                        return p+'_'+(count++);
+                    }
+                })(prefix);
+            }
+            return factories[prefix];
+        };
+
+        this.$get = [function() {
+            return this;
+        }]
+    }])
 
 })(angular.module('ng.weui.core'), window);
 

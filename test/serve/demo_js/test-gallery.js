@@ -9,15 +9,6 @@
 
         this.previewImages = [
             {
-                //thumb:'images/pic_article.png',
-                url:'images/pic_article.png'
-            },{
-                thumb:'images/pic_article.png',
-                url:'images/pic_article.png'
-            },{
-                thumb:'images/pic_article.png',
-                url:'images/pic_article.png'
-            }/*,{
                 thumb:'images/pic_article.png',
                 url:'images/pic_article.png'
             },{
@@ -38,7 +29,16 @@
             },{
                 thumb:'images/pic_article.png',
                 url:'images/pic_article.png'
-            },*/
+            },{
+                thumb:'images/pic_article.png',
+                url:'images/pic_article.png'
+            },{
+                thumb:'images/pic_article.png',
+                url:'images/pic_article.png'
+            },{
+                thumb:'images/pic_article.png',
+                url:'images/pic_article.png'
+            },
         ];
     }])
-})(angular.module('test',['ng.weui']));
+})(angular.module('test.gallery',['ng.weui']));
