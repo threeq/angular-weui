@@ -787,8 +787,7 @@ $templateCache.put("weui/template/toast/message.html","<div class=\"weui-mask_tr
      * 表格数据 html 输出
      * 这个会有 xss 风险
      */
-    app.directive('unsafeShowHtml', function ($compile,$sce) {
-      "ngInject";
+    app.directive('unsafeShowHtml', ['$compile', function ($compile) {
 
       /**
        * html 编码，html源码输出
@@ -818,7 +817,7 @@ $templateCache.put("weui/template/toast/message.html","<div class=\"weui-mask_tr
           //});
         }
       }
-    });
+  }]);
 })(angular.module('ng.weui.dialog'));
 
 /**
